@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FocusTube</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 20px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+      border-bottom: 2px solid #7f99ff;
+      padding-bottom: 10px;
+    }
+
+    nav a {
+      color: #7f99ff;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 0 15px;
+      line-height: 40px;
+      position: relative;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+
+    nav a:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 25%;
+      height: 50%;
+      width: 1px;
+      background-color: #7f99ff;
+      opacity: 0.5;
+    }
+
+    nav a:hover {
+      color: #657ce6;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #7f99ff;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #7f99ff;
+    }
+
+    form {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 30px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      font-size: 1rem;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
+      outline: none;
+    }
+
+    button {
+      padding: 10px 16px;
+      font-size: 1rem;
+      background-color: #7f99ff;
+      color: white;
+      border: none;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #657ce6;
+    }
+
+    #results {
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    #results div {
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #results a {
+      font-weight: bold;
+      color: #7f99ff;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    #results a:hover {
+      text-decoration: underline;
+    }
+
+    #results small {
+      display: block;
+      color: #666;
+      margin-bottom: 5px;
+    }
+
+    #results img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin-top: 10px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+        html {
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
+}
+
+    /* Loading Spinner */
+    .loader {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 40px 0;
+    }
+
+    .loader::after {
+      content: "";
+      width: 40px;
+      height: 40px;
+      border: 4px solid #ccc;
+      border-top-color: #7f99ff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 1.1rem;
+      padding: 15px;
+      border-radius: 6px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="tutorial.html">YouTube Disable Guide</a>
+      <a href="about.html">About</a>
+    </nav>
+
+    <h1>FocusTube</h1>
+
+    <h2>YouTube Search Filter powered by AI, focused on educational results</h2>
+
+    <form id="searchForm">
+      <input type="text" id="searchInput" placeholder="Enter search term" required />
+      <button type="submit">Search</button>
+    </form>
+
+    <div id="results"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('searchForm');
+    const resultsDiv = document.getElementById('results');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      resultsDiv.innerHTML = '<div class="loader"></div>';
+
+      const query = document.getElementById('searchInput').value.trim();
+      if (!query) {
+        resultsDiv.innerHTML = '<div class="message error">Please enter a search term.</div>';
+        return;
+      }
+
+      try {
+        const res = await fetch(`http://localhost:3000/api/search?q=${encodeURIComponent(query)}`);
+        if (!res.ok) throw new Error('Network error');
+        const videos = await res.json();
+
+        if (!videos.length) {
+          resultsDiv.innerHTML = '<div class="message info">No results found or the content isn’t education-related</div>';
+          return;
+        }
+
+        resultsDiv.innerHTML = videos
+          .map(
+            ({ videoID, title, publishDate, duration, image }) => `
+          <div>
+            <a href="player.html?videoID=${videoID}">${title}</a> 
+            <small>Published: ${publishDate}</small>
+            <small>Duration: ${duration}</small>
+            <a href="player.html?videoID=${videoID}">
+              <img src="${image}" alt="YouTube Video Thumbnail">
+            </a>
+          </div>`
+          )
+          .join('');
+      } catch (err) {
+        resultsDiv.innerHTML = '<div class="message error">⚠️ Failed to load videos. Please try again later.</div>';
+        console.error(err);
+      }
+    });
+  </script>
+</body>
+
+</html>

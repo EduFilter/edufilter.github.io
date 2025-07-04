@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FocusTube</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+      border-bottom: 2px solid #7f99ff;
+      padding-bottom: 10px;
+    }
+
+    nav a {
+      color: #7f99ff;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 0 15px;
+      line-height: 40px;
+      position: relative;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+
+    /* Add vertical separator except for last item */
+    nav a:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 25%;
+      height: 50%;
+      width: 1px;
+      background-color: #7f99ff;
+      opacity: 0.5;
+    }
+
+    nav a:hover {
+      color: #657ce6;
+    }
+
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #7f99ff;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      text-align: justify;
+      margin-bottom: 1rem;
+    }
+
+    a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .no-justify {
+      text-align: left;
+    }
+
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="tutorial.html">YouTube Disable Guide</a>
+      <a href="about.html">About</a>
+    </nav>
+
+    <h1>About This Tool</h1>
+
+    <p>
+      This site provides an AI-powered educational YouTube filter that helps users stay focused by limiting video searches to educational content only.
+      The tool is designed to reduce distractions and promote a more productive Youtube experience.
+    </p>
+
+    <p>
+      Please note that the filtering is powered by artificial intelligence, and while it is designed to be helpful, it is not perfect.  
+      Some content may be incorrectly allowed or blocked.
+    </p>
+
+    <p class="no-justify">
+      For feedback, questions, or collaboration, feel free to reach out to me at: <strong>serge.popov.pro@gmail.com</strong>
+    </p>
+  </div>
+</body>
+</html>

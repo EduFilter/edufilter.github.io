@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FocusTube</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
+}
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f9f9f9;
+      color: #333;
+      padding: 20px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 40px;
+      border-bottom: 2px solid #7f99ff;
+      padding-bottom: 10px;
+    }
+
+    nav a {
+      color: #7f99ff;
+      font-weight: bold;
+      text-decoration: none;
+      padding: 0 15px;
+      line-height: 40px;
+      position: relative;
+      transition: color 0.3s;
+      white-space: nowrap;
+    }
+
+    /* Add vertical separator except for last item */
+    nav a:not(:last-child)::after {
+      content: "";
+      position: absolute;
+      right: 0;
+      top: 25%;
+      height: 50%;
+      width: 1px;
+      background-color: #7f99ff;
+      opacity: 0.5;
+    }
+
+    nav a:hover {
+      color: #657ce6;
+    }
+
+    h1 {
+      font-size: 2rem;
+      text-align: center;
+      margin-bottom: 20px;
+      color: #7f99ff;
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      text-align: justify;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      color: #2c3e50;
+      margin-top: 2rem;
+      margin-bottom: 0.75rem;
+    }
+
+    ul {
+      margin-bottom: 1rem;
+      padding-left: 1.25rem;
+    }
+
+    a {
+      color: #1a73e8;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="tutorial.html">YouTube Disable Guide</a>
+      <a href="about.html">About</a>
+    </nav>
+
+    <h1>How to Remove or Block YouTube on Your Computer: A Complete Tutorial</h1>
+
+    <p>You’re already using this app to filter YouTube searches to show only educational content.
+      To take it a step further, this tutorial shows you how to completely block access to the regular YouTube site on your computer.  
+    </p>
+
+    <p>Here are <strong>three ways</strong> to block or remove access to YouTube:</p>
+
+    <section>
+      <h2>1. Website Blocking via Guides and Manual Setup</h2>
+      <p>
+        You can manually block YouTube using system settings or network-level restrictions. For detailed step-by-step instructions, check out this comprehensive guide:
+      </p>
+      <ul>
+        <li><a href="https://www.wikihow.com/Block-YouTube" target="_blank" rel="noopener noreferrer">How to Block YouTube (WikiHow)</a></li>
+      </ul>
+      <p>
+        This guide explains how to edit your computer’s hosts file or configure router settings to block access to YouTube across all browsers.
+      </p>
+    </section>
+
+    <section>
+      <h2>2. Browser Extensions for Website Blocking</h2>
+      <p>
+        One of the easiest and most flexible ways to block YouTube is by using browser extensions designed to block websites.</p>
+      <ul>
+        <li><a href="https://chrome.google.com/webstore/detail/blocksite-free-block-webs/igeljfkabcpapkofhibeeaoopcncpkgc" target="_blank" rel="noopener noreferrer">BlockSite - Free Block Websites</a></li>
+        <li><a href="https://chrome.google.com/webstore/detail/blocksite-block-websites/eiimnmioipafcokbfikbljfdeojpcgbh" target="_blank" rel="noopener noreferrer">BlockSite - Block Websites &amp; Stay Focused</a></li>
+        <li><a href="https://chrome.google.com/webstore/detail/block-site/lebiggkccaodkkmjeimmbogdedcpnmfb" target="_blank" rel="noopener noreferrer">Block Site</a></li>
+      </ul>
+      <p><strong>Tip:</strong> Combining multiple blocking extensions can help.</p>
+    </section>
+
+    <section>
+      <h2>3. Parental Controls and Family Safety Tools</h2>
+      <p>
+        If the goal is to control access for children or family members, parental control software is the most comprehensive option. These tools often allow you to block YouTube system-wide across devices, monitor usage, and set time limits.
+      </p>
+      <ul>
+        <li><a href="https://www.microsoft.com/en-us/microsoft-365/family-safety" target="_blank" rel="noopener noreferrer">Microsoft Family Safety</a></li>
+        <li><a href="https://families.google/familylink/" target="_blank" rel="noopener noreferrer">Google Family Link</a></li>
+        <li><a href="https://support.apple.com/en-us/105121" target="_blank" rel="noopener noreferrer">Apple Screen Time and Parental Controls</a></li>
+      </ul>
+ 
+    </section>
+
+  
+  </div>
+</body>
+</html>
