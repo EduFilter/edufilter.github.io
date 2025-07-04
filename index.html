@@ -140,10 +140,10 @@
       margin: 0 auto;
     }
 
-        html {
-  overflow-x: hidden;
-  margin-right: calc(-1 * (100vw - 100%));
-}
+    html {
+      overflow-x: hidden;
+      margin-right: calc(-1 * (100vw - 100%));
+    }
 
     /* Loading Spinner */
     .loader {
@@ -179,6 +179,18 @@
       margin-left: auto;
       margin-right: auto;
     }
+
+
+    .beta-note a {
+      color: #7f99ff;
+      text-decoration: underline;
+    }
+
+    .beta-note {
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
   </style>
 </head>
 
@@ -193,6 +205,14 @@
     <h1>FocusTube Beta</h1>
 
     <h2>YouTube Search Filter powered by AI, focused on educational results</h2>
+
+    <div class="beta-note">
+      This is a <strong>beta version</strong>. If you encounter any bugs, please report them via
+      <a href="https://forms.gle/LSQkKGMaWwGDGqY98" target="_blank" rel="noopener noreferrer">this Google form</a>. It
+      takes less than a minute to fill out.
+    </div>
+
+    <div class="beta-note">Thank you for sharing the project with others; your support helps a lot and makes it possible to reach more people !</div>
 
     <form id="searchForm">
       <input type="text" id="searchInput" placeholder="Enter search term" required />
