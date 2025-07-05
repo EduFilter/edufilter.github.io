@@ -238,48 +238,50 @@
     const resultsDiv = document.getElementById('results');
 
     form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      resultsDiv.innerHTML = '<div class="loader"></div>';
+  e.preventDefault();
+  resultsDiv.innerHTML = '<div class="loader"></div>';
 
-      const query = document.getElementById('searchInput').value.trim();
-      if (!query) {
-        resultsDiv.innerHTML = '<div class="message error">Please enter a search term.</div>';
-        return;
-      }
+  const instructionDiv = document.getElementById('clickInstruction');
+  instructionDiv.style.display = 'none'; // 👈 Always hide it at the start
 
-      try {
-        const res = await fetch(`https://focustube-gbftfrcnd5b0aadd.uksouth-01.azurewebsites.net/api/filter?q=${encodeURIComponent(query)}`);
-        if (!res.ok) throw new Error('Network error');
-        const videos = await res.json();
+  const query = document.getElementById('searchInput').value.trim();
+  if (!query) {
+    resultsDiv.innerHTML = '<div class="message error">Please enter a search term.</div>';
+    return;
+  }
 
-        const instructionDiv = document.getElementById('clickInstruction');
+  try {
+    const res = await fetch(`https://focustube-gbftfrcnd5b0aadd.uksouth-01.azurewebsites.net/api/filter?q=${encodeURIComponent(query)}`);
+    if (!res.ok) throw new Error('Network error');
+    const videos = await res.json();
 
-        if (!videos.length) {
-          resultsDiv.innerHTML = '<div class="message info">No results found or the content isn’t education-related</div>';
-          return;
-        }
+    if (!videos.length) {
+      resultsDiv.innerHTML = '<div class="message info">No results found or the content isn’t education-related</div>';
+      instructionDiv.style.display = 'none'; // 👈 Hide it if no videos
+      return;
+    }
 
-        instructionDiv.style.display = 'block';
+    instructionDiv.style.display = 'block'; // 👈 Show it only if there are videos
 
-
-        resultsDiv.innerHTML = videos
-          .map(
-            ({ videoID, title, publishDate, duration, image }) => `
-          <div>
-            <a href="player.html?videoID=${videoID}">${title}</a> 
-            <small>Published: ${publishDate}</small>
-            <small>Duration: ${duration}</small>
-            <a href="player.html?videoID=${videoID}">
-              <img src="${image}" alt="YouTube Video Thumbnail">
-            </a>
-          </div>`
-          )
-          .join('');
-      } catch (err) {
-        resultsDiv.innerHTML = '<div class="message error">⚠️ Failed to load videos. Please try again later.</div>';
-        console.error(err);
-      }
-    });
+    resultsDiv.innerHTML = videos
+      .map(
+        ({ videoID, title, publishDate, duration, image }) => `
+        <div>
+          <a href="player.html?videoID=${videoID}">${title}</a> 
+          <small>Published: ${publishDate}</small>
+          <small>Duration: ${duration}</small>
+          <a href="player.html?videoID=${videoID}">
+            <img src="${image}" alt="YouTube Video Thumbnail">
+          </a>
+        </div>`
+      )
+      .join('');
+  } catch (err) {
+    resultsDiv.innerHTML = '<div class="message error">⚠️ Failed to load videos. Please try again later.</div>';
+    instructionDiv.style.display = 'none'; // 👈 Hide it on error
+    console.error(err);
+  }
+});
   </script>
 </body>
 
