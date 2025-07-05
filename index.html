@@ -68,7 +68,7 @@
     form {
       display: flex;
       justify-content: center;
-      margin-bottom: 30px;
+      margin-bottom: 0px;
     }
 
     input[type="text"] {
@@ -191,6 +191,10 @@
       text-align: center;
     }
 
+    #clickInstruction {
+      margin-bottom: 20px;
+    }
+
   </style>
 </head>
 
@@ -219,6 +223,12 @@
       <button type="submit">Search</button>
     </form>
 
+
+
+    <div id="clickInstruction" class="message" style="display: none; margin-top: 10px;">
+    Click a video to watch
+  </div>
+
     <div id="results"></div>
   </div>
 
@@ -241,10 +251,15 @@
         if (!res.ok) throw new Error('Network error');
         const videos = await res.json();
 
+        const instructionDiv = document.getElementById('clickInstruction');
+
         if (!videos.length) {
           resultsDiv.innerHTML = '<div class="message info">No results found or the content isn’t education-related</div>';
           return;
         }
+
+        instructionDiv.style.display = 'block';
+
 
         resultsDiv.innerHTML = videos
           .map(
