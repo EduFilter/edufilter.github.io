@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7VWNJ8M10X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7VWNJ8M10X');
+</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EduFilter</title>
@@ -12,15 +21,15 @@
     }
 
     html {
-  overflow-x: hidden;
-  margin-right: calc(-1 * (100vw - 100%));
-}
+      overflow-x: hidden;
+      margin-right: calc(-1 * (100vw - 100%));
+    }
 
     body {
       font-family: Arial, sans-serif;
       background-color: #f9f9f9;
-      color: #333;
       padding: 20px;
+      color: #333;
     }
 
     .container {
@@ -28,39 +37,58 @@
       margin: 0 auto;
     }
 
-    nav { 
+    /* Nav styles from first file */
+    nav {
       display: flex;
       justify-content: center;
-      margin-bottom: 40px;
+      align-items: center;
+      margin-bottom: 30px;
       border-bottom: 2px solid #7f99ff;
       padding-bottom: 10px;
     }
 
-    nav a {
+    /* Regular nav links */
+    nav a:not(.bmc-button-nav) {
       color: #7f99ff;
       font-weight: bold;
       text-decoration: none;
-      padding: 0 15px;
       line-height: 40px;
-      position: relative;
-      transition: color 0.3s;
+      margin-right: 25px; /* spacing between links */
       white-space: nowrap;
+      transition: color 0.3s;
+      display: inline-block;
+      vertical-align: middle;
     }
 
-    /* Add vertical separator except for last item */
-    nav a:not(:last-child)::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      top: 25%;
-      height: 50%;
-      width: 1px;
-      background-color: #7f99ff;
-      opacity: 0.5;
-    }
-
-    nav a:hover {
+    nav a:not(.bmc-button-nav):hover {
+      text-decoration: underline;
       color: #657ce6;
+    }
+
+    /* Buy Me a Coffee button */
+    .bmc-button-nav {
+      margin-left: 5px;
+      margin-right: 0;
+      background-color: #7f99ff;
+      color: white !important;
+      font-weight: bold;
+      border-radius: 4px;
+      border: 2px solid #657ce6;
+      box-shadow: 0 2px 8px rgba(127, 153, 255, 0.2);
+      padding: 0 12px;
+      line-height: 40px;
+      height: 40px;
+      text-decoration: none;
+      display: inline-block;
+      vertical-align: middle;
+      transition: all 0.3s ease;
+    }
+
+    .bmc-button-nav:hover {
+      background-color: #657ce6;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(101, 124, 230, 0.3);
+      color: white !important;
     }
 
     h1 {
@@ -78,9 +106,9 @@
     }
 
     h2 {
-      color: #2c3e50;
       margin-top: 2rem;
       margin-bottom: 0.75rem;
+      color: #7f99ff;
     }
 
     ul {
@@ -89,19 +117,15 @@
     }
 
     a {
-      color: #1a73e8;
+      color: #7f99ff;
       text-decoration: none;
     }
 
-    a:hover {
-      text-decoration: underline;
-    }
+   
 
     section {
       margin-bottom: 2rem;
     }
-
-    
   </style>
 </head>
 <body>
@@ -111,6 +135,7 @@
       <a href="index.html">Home</a>
       <a href="tutorial.html">YouTube Disable Guide</a>
       <a href="about.html">About</a>
+      <a href="https://www.buymeacoffee.com/sergepov" target="_blank" class="bmc-button-nav">☕ Buy me a coffee</a>
     </nav>
 
     <h1>How to Remove or Block YouTube on Your Computer: A Complete Tutorial</h1>
@@ -121,12 +146,11 @@
 
     <p>Here are <strong>two ways</strong> to block or remove access to YouTube:</p>
 
-
-
     <section>
       <h2>1. Browser Extensions for Website Blocking</h2>
       <p>
-        One of the easiest and most flexible ways to block YouTube is by using browser extensions designed to block websites.</p>
+        One of the easiest and most flexible ways to block YouTube is by using browser extensions designed to block websites.
+      </p>
       <ul>
         <li><a href="https://chrome.google.com/webstore/detail/blocksite-free-block-webs/igeljfkabcpapkofhibeeaoopcncpkgc" target="_blank" rel="noopener noreferrer">BlockSite - Free Block Websites</a></li>
         <li><a href="https://chrome.google.com/webstore/detail/blocksite-block-websites/eiimnmioipafcokbfikbljfdeojpcgbh" target="_blank" rel="noopener noreferrer">BlockSite - Block Websites &amp; Stay Focused</a></li>
@@ -145,10 +169,8 @@
         <li><a href="https://families.google/familylink/" target="_blank" rel="noopener noreferrer">Google Family Link</a></li>
         <li><a href="https://support.apple.com/en-us/105121" target="_blank" rel="noopener noreferrer">Apple Screen Time and Parental Controls</a></li>
       </ul>
- 
     </section>
 
-  
   </div>
 </body>
 </html>

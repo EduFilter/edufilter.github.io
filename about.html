@@ -2,9 +2,18 @@
 <html lang="en">
 
 <head>
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-7VWNJ8M10X"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-7VWNJ8M10X');
+</script>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EduFilter</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EduFilter - About</title>
   <style>
     * {
       box-sizing: border-box;
@@ -12,84 +21,94 @@
       padding: 0;
     }
 
-    html {
-      overflow-x: hidden;
-      margin-right: calc(-1 * (100vw - 100%));
-    }
-
     body {
       font-family: Arial, sans-serif;
       background-color: #f9f9f9;
       color: #333;
       padding: 20px;
+      text-align: center;
     }
 
     .container {
       max-width: 800px;
       margin: 0 auto;
+      text-align: left;
     }
 
     nav {
       display: flex;
       justify-content: center;
-      margin-bottom: 40px;
+      align-items: center;
+      margin-bottom: 30px;
       border-bottom: 2px solid #7f99ff;
       padding-bottom: 10px;
     }
 
-    nav a {
+    nav a:not(.bmc-button-nav) {
       color: #7f99ff;
       font-weight: bold;
       text-decoration: none;
-      padding: 0 15px;
       line-height: 40px;
-      position: relative;
-      transition: color 0.3s;
+      margin-right: 25px;
       white-space: nowrap;
+      transition: color 0.3s;
+      display: inline-block;
+      vertical-align: middle;
     }
 
-    /* Add vertical separator except for last item */
-    nav a:not(:last-child)::after {
-      content: "";
-      position: absolute;
-      right: 0;
-      top: 25%;
-      height: 50%;
-      width: 1px;
-      background-color: #7f99ff;
-      opacity: 0.5;
-    }
-
-    nav a:hover {
+    nav a:not(.bmc-button-nav):hover {
+      text-decoration: underline;
       color: #657ce6;
     }
 
+    .bmc-button-nav {
+      margin-left: 5px;
+      margin-right: 0;
+      background-color: #7f99ff;
+      color: white !important;
+      font-weight: bold;
+      border-radius: 4px;
+      border: 2px solid #657ce6;
+      box-shadow: 0 2px 8px rgba(127, 153, 255, 0.2);
+      padding: 0 12px;
+      line-height: 40px;
+      height: 40px;
+      text-decoration: none;
+      display: inline-block;
+      vertical-align: middle;
+      transition: all 0.3s ease;
+    }
+
+    .bmc-button-nav:hover {
+      background-color: #657ce6;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(101, 124, 230, 0.3);
+      color: white !important;
+    }
+
     h1 {
-      font-size: 2rem;
-      text-align: center;
-      margin-bottom: 20px;
       color: #7f99ff;
+      margin-bottom: 20px;
+      text-align: center;
     }
 
     p {
-      font-size: 1.1rem;
-      line-height: 1.6;
-      text-align: justify;
       margin-bottom: 1rem;
+      line-height: 1.6;
+      font-size: 1.1rem;
     }
 
     a {
       color: #7f99ff;
-      text-decoration: underline;
+      text-decoration: none;
     }
 
-    a:hover {
-      text-decoration: underline;
-    }
+    
 
-    .no-justify {
-      text-align: left;
-    }
+    html {
+  overflow-x: hidden;
+  margin-right: calc(-1 * (100vw - 100%));
+}
 
 
   </style>
@@ -97,36 +116,34 @@
 
 <body>
   <div class="container">
+
     <nav>
       <a href="index.html">Home</a>
       <a href="tutorial.html">YouTube Disable Guide</a>
       <a href="about.html">About</a>
+      <a href="https://www.buymeacoffee.com/sergepov" target="_blank" class="bmc-button-nav">☕ Buy me a coffee</a>
     </nav>
 
-    <h1>About This Tool</h1>
+    <h1>EduFilter - About</h1>
 
-    <p>This site provides an AI-powered educational YouTube filter that helps users stay focused by
-      limiting video searches to educational content only.</p>
+    <p>This site provides an AI-powered educational YouTube filter that helps users stay focused by limiting video searches to educational content only.</p>
 
-    <p>Please note that the filtering is powered by AI and based solely on the video titles. While
-      designed to be helpful, it is not perfect—some non-educational videos may be allowed, and some educational ones
-      may be missed.</p>
+    <p>Please note that the filtering is powered by AI and based solely on the video titles. While designed to be helpful, it is not perfect—some non-educational videos may be allowed, and some educational ones may be missed.</p>
 
-          <p>
-      This is a beta version. If you encounter any bugs, please report them via <a
-        href="https://forms.gle/LSQkKGMaWwGDGqY98" target="_blank" rel="noopener noreferrer">this Google form</a> — it
-      takes less than a minute to fill out.
-    </p>
+    <p>If you encounter any bugs, please report them via this <a href="https://docs.google.com/forms/d/e/1FAIpQLSd-example" target="_blank" rel="noopener noreferrer">Google form</a> — it takes less than a minute to fill out.</p>
 
-    <p class="no-justify">
-      For feedbacks, questions, or collaboration feel free to reach out to me at :
-      <strong>serge.popov.pro@gmail.com</strong>
-    </p>
+<p>For feedback, questions, or collaboration feel free to reach out to me at: <a href="mailto:serge.popov.pro@gmail.com">serge.popov.pro@gmail.com</a></p>
 
+<p>If you want to connect professionally, feel free to visit my 
+  <a href="https://www.linkedin.com/in/serge-popov-ab0258201" target="_blank" rel="noopener noreferrer">LinkedIn profile</a>
+</p>
 
+<p>If you’d like to support the development of this tool, you can do so here: 
+      <a href="https://www.buymeacoffee.com/sergepov" target="_blank" rel="noopener noreferrer">Buy me a coffee☕</a>.
+      Every little bit helps and is greatly appreciated!</p>
 
-    <p>Thank you for sharing the project with others; your support helps a lot and makes it possible to reach more
-      people !</p>
+          <p>Thank you for sharing the project with others; your support helps a lot and makes it possible to reach more people!</p>
+
   </div>
 </body>
 
