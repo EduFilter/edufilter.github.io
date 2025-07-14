@@ -1,25 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7VWNJ8M10X"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VWNJ8M10X"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7VWNJ8M10X');
+  </script>
 
-  gtag('config', 'G-7VWNJ8M10X');
-</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EduFilter</title>
-  <style>
 
-        html {
-  overflow-x: hidden;
-  margin-right: calc(-1 * (100vw - 100%));
-}
+  <style>
+    html {
+      overflow-x: hidden;
+      margin-right: calc(-1 * (100vw - 100%));
+    }
 
     * {
       box-sizing: border-box;
@@ -38,50 +37,59 @@
     .container {
       max-width: 800px;
       margin: 0 auto;
+      text-align: center;
     }
 
-    /* Nav styles from first file */
+    /* Responsive Navbar styles */
+    .navbar {
+      border-bottom: 2px solid #7f99ff;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+    }
+
+    .nav-toggle {
+      display: none;
+    }
+
+    .nav-label {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      user-select: none;
+      color: #7f99ff;
+    }
+
     nav {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 30px;
-      border-bottom: 2px solid #7f99ff;
-      padding-bottom: 10px;
+      gap: 25px;
+      flex-wrap: wrap;
     }
 
-    nav a:not(.bmc-button-nav) {
+    nav a {
       color: #7f99ff;
       font-weight: bold;
       text-decoration: none;
       line-height: 40px;
-      margin-right: 25px;
-      white-space: nowrap;
       transition: color 0.3s;
-      display: inline-block;
-      vertical-align: middle;
     }
 
-    nav a:not(.bmc-button-nav):hover {
+    nav a:hover {
       text-decoration: underline;
       color: #657ce6;
     }
 
     .bmc-button-nav {
-      margin-left: 5px;
-      margin-right: 0;
       background-color: #7f99ff;
       color: white !important;
-      font-weight: bold;
       border-radius: 4px;
       border: 2px solid #657ce6;
       box-shadow: 0 2px 8px rgba(127, 153, 255, 0.2);
       padding: 0 12px;
-      line-height: 40px;
       height: 40px;
-      text-decoration: none;
+      line-height: 40px;
       display: inline-block;
-      vertical-align: middle;
       transition: all 0.3s ease;
     }
 
@@ -89,9 +97,39 @@
       background-color: #657ce6;
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(101, 124, 230, 0.3);
-      color: white !important;
     }
 
+    /* Responsive styles */
+    @media (max-width: 600px) {
+      .nav-label {
+        display: block;
+        text-align: right;
+        margin-bottom: 10px;
+      }
+
+      nav {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .navbar {
+        border-bottom: 0px;
+      }
+
+      .nav-toggle:checked + .nav-label + nav {
+        display: flex;
+      }
+
+      nav a,
+      .bmc-button-nav {
+        width: 100%;
+        text-align: center;
+        margin: 5px 0;
+      }
+    }
+
+    /* Page-specific styles */
     .message {
       max-width: 700px;
       margin: 0 auto 20px;
@@ -104,34 +142,39 @@
       text-decoration: underline;
     }
 
-    .hytPlayerWrapOuter {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin-bottom: 20px;
-      padding: 0 20px;
-    }
+ .hytPlayerWrapOuter {
+  max-width: 100%;
+  padding: 0 20px;
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
+}
 
-    .hytPlayerWrap {
-      position: relative;
-      width: 640px;
-      height: 360px;
-      background-color: #000;
-      border-radius: 12px;
-      overflow: hidden;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-      transition: box-shadow 0.3s ease;
-    }
+.hytPlayerWrap {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;   /* 16:9 aspect ratio */
+  background-color: #000;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+  transition: box-shadow 0.3s ease;
+}
 
-    .hytPlayerWrap:hover {
-      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
-    }
+.hytPlayerWrap:hover {
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+}
 
-    .hytPlayerWrap iframe {
-      width: 100%;
-      height: 100%;
-      border: none;
-    }
+.hytPlayerWrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;  /* helps some browsers */
+}
+
 
     .back-link {
       margin-top: 20px;
@@ -145,20 +188,23 @@
     .back-link:hover {
       color: #657ce6;
     }
-
-
   </style>
 </head>
 
 <body>
   <div class="container">
 
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="tutorial.html">YouTube Disable Guide</a>
-      <a href="about.html">About</a>
-      <a href="https://www.buymeacoffee.com/sergepov" target="_blank" class="bmc-button-nav">☕ Buy me a coffee</a>
-    </nav>
+    <div class="navbar">
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+      <label for="nav-toggle" class="nav-label">&#9776; Menu</label>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="tutorial.html">YouTube Disable Guide</a>
+        <a href="about.html">About</a>
+        <a href="https://www.buymeacoffee.com/sergepov" target="_blank" class="bmc-button-nav">☕ Buy me a coffee</a>
+      </nav>
+    </div>
 
     <div class="message">
       YouTube doesn't allow blocking ads or recommendations in embedded videos.<br />
@@ -176,15 +222,13 @@
     </div>
 
     <a class="back-link" href="index.html">← Back to Search</a>
-
   </div>
 
   <script>
     const params = new URLSearchParams(window.location.search);
-    const videoID = params.get('videoID'); // fallback video
+    const videoID = params.get('videoID');
     const iframe = document.getElementById('videoPlayer');
     iframe.src = `https://www.youtube.com/embed/${videoID}?origin=https://edufilter.github.io`;
   </script>
 </body>
-
 </html>

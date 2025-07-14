@@ -1,19 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7VWNJ8M10X"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VWNJ8M10X"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7VWNJ8M10X');
+  </script>
 
-  gtag('config', 'G-7VWNJ8M10X');
-</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>EduFilter - About</title>
+  <title>EduFilter</title>
+
   <style>
     * {
       box-sizing: border-box;
@@ -35,47 +35,59 @@
       text-align: left;
     }
 
+    /* Navbar base styles */
+    .navbar {
+      border-bottom: 2px solid #7f99ff;
+      padding-bottom: 10px;
+      margin-bottom: 30px;
+    }
+
+  
+
+    .nav-toggle {
+      display: none;
+    }
+
+    .nav-label {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      user-select: none;
+      color: #7f99ff;
+    }
+
     nav {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 30px;
-      border-bottom: 2px solid #7f99ff;
-      padding-bottom: 10px;
+      gap: 25px;
+      flex-wrap: wrap;
+      margin-top: 0px;
     }
 
-    nav a:not(.bmc-button-nav) {
+    nav a {
       color: #7f99ff;
       font-weight: bold;
       text-decoration: none;
       line-height: 40px;
-      margin-right: 25px;
-      white-space: nowrap;
       transition: color 0.3s;
-      display: inline-block;
-      vertical-align: middle;
     }
 
-    nav a:not(.bmc-button-nav):hover {
+    nav a:hover {
       text-decoration: underline;
       color: #657ce6;
     }
 
     .bmc-button-nav {
-      margin-left: 5px;
-      margin-right: 0;
       background-color: #7f99ff;
       color: white !important;
-      font-weight: bold;
       border-radius: 4px;
       border: 2px solid #657ce6;
       box-shadow: 0 2px 8px rgba(127, 153, 255, 0.2);
       padding: 0 12px;
-      line-height: 40px;
       height: 40px;
-      text-decoration: none;
+      line-height: 40px;
       display: inline-block;
-      vertical-align: middle;
       transition: all 0.3s ease;
     }
 
@@ -83,7 +95,6 @@
       background-color: #657ce6;
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(101, 124, 230, 0.3);
-      color: white !important;
     }
 
     h1 {
@@ -100,29 +111,60 @@
 
     a {
       color: #7f99ff;
-      text-decoration: none;
     }
 
-    
-
     html {
-  overflow-x: hidden;
-  margin-right: calc(-1 * (100vw - 100%));
-}
+      overflow-x: hidden;
+      margin-right: calc(-1 * (100vw - 100%));
+    }
+
+    /* Responsive styles */
+    @media (max-width: 600px) {
+      .nav-label {
+        display: block;
+        text-align: right;
+        margin-bottom: 10px;
+      }
+
+      nav {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        
+      }
+
+     .navbar {
+      border-bottom: 0px;
+    }
 
 
+      .nav-toggle:checked + .nav-label + nav {
+        display: flex;
+      }
+
+      nav a, .bmc-button-nav {
+        width: 100%;
+        text-align: center;
+        margin: 5px 0;
+      }
+    }
   </style>
 </head>
 
 <body>
   <div class="container">
 
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="tutorial.html">YouTube Disable Guide</a>
-      <a href="about.html">About</a>
-      <a href="https://www.buymeacoffee.com/sergepov" target="_blank" class="bmc-button-nav">☕ Buy me a coffee</a>
-    </nav>
+    <div class="navbar">
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+      <label for="nav-toggle" class="nav-label">&#9776; Menu</label>
+
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="tutorial.html">YouTube Disable Guide</a>
+        <a href="about.html">About</a>
+        <a href="https://www.buymeacoffee.com/sergepov" target="_blank" class="bmc-button-nav">☕ Buy me a coffee</a>
+      </nav>
+    </div>
 
     <h1>EduFilter - About</h1>
 
@@ -130,21 +172,25 @@
 
     <p>Please note that the filtering is powered by AI and based solely on the video titles. While designed to be helpful, it is not perfect—some non-educational videos may be allowed, and some educational ones may be missed.</p>
 
-    <p>If you encounter any bugs, please report them via this <a href="https://docs.google.com/forms/d/e/1FAIpQLSd-example" target="_blank" rel="noopener noreferrer">Google form</a> — it takes less than a minute to fill out.</p>
+    <p>If you encounter any bugs, please report them via this 
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd-example" target="_blank" rel="noopener noreferrer">Google form</a> — it takes less than a minute to fill out.
+    </p>
 
-<p>For feedback, questions, or collaboration feel free to reach out to me at: <a href="mailto:serge.popov.pro@gmail.com">serge.popov.pro@gmail.com</a></p>
+    <p>For feedback, questions, or collaboration feel free to reach out to me at: 
+      <a href="mailto:serge.popov.pro@gmail.com">serge.popov.pro@gmail.com</a>
+    </p>
 
-<p>If you want to connect professionally, feel free to visit my 
-  <a href="https://www.linkedin.com/in/serge-popov-ab0258201" target="_blank" rel="noopener noreferrer">LinkedIn profile</a>
-</p>
+    <p>If you want to connect professionally, feel free to visit my 
+      <a href="https://www.linkedin.com/in/serge-popov-ab0258201" target="_blank" rel="noopener noreferrer">LinkedIn profile</a>.
+    </p>
 
-<p>If you’d like to support the development of this tool, you can do so here: 
-      <a href="https://www.buymeacoffee.com/sergepov" target="_blank" rel="noopener noreferrer">Buy me a coffee☕</a>.
-      Every little bit helps and is greatly appreciated!</p>
+    <p>If you’d like to support the development of this tool, you can do so here: 
+      <a href="https://www.buymeacoffee.com/sergepov" target="_blank" rel="noopener noreferrer">Buy me a coffee☕</a>. 
+      Every little bit helps and is greatly appreciated!
+    </p>
 
-          <p>Thank you for sharing the project with others; your support helps a lot and makes it possible to reach more people!</p>
+    <p>Thank you for sharing the project with others; your support helps a lot and makes it possible to reach more people!</p>
 
   </div>
 </body>
-
 </html>

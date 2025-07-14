@@ -1,18 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-7VWNJ8M10X"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VWNJ8M10X"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-7VWNJ8M10X');
+  </script>
 
-  gtag('config', 'G-7VWNJ8M10X');
-</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EduFilter</title>
+
   <style>
     * {
       box-sizing: border-box;
@@ -37,27 +38,42 @@
       margin: 0 auto;
     }
 
-    /* Nav styles from first file */
+    /* Responsive navbar container */
+    .navbar {
+      margin-bottom: 30px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #7f99ff;
+    }
+
+    .nav-toggle {
+      display: none;
+    }
+
+    .nav-label {
+      display: none;
+      font-size: 24px;
+      color: #7f99ff;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 10px;
+      text-align: right;
+    }
+
     nav {
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-bottom: 30px;
-      border-bottom: 2px solid #7f99ff;
-      padding-bottom: 10px;
+      flex-wrap: wrap;
+      gap: 25px;
     }
 
-    /* Regular nav links */
     nav a:not(.bmc-button-nav) {
       color: #7f99ff;
       font-weight: bold;
       text-decoration: none;
       line-height: 40px;
-      margin-right: 25px; /* spacing between links */
-      white-space: nowrap;
       transition: color 0.3s;
-      display: inline-block;
-      vertical-align: middle;
+      white-space: nowrap;
     }
 
     nav a:not(.bmc-button-nav):hover {
@@ -65,10 +81,7 @@
       color: #657ce6;
     }
 
-    /* Buy Me a Coffee button */
     .bmc-button-nav {
-      margin-left: 5px;
-      margin-right: 0;
       background-color: #7f99ff;
       color: white !important;
       font-weight: bold;
@@ -80,7 +93,6 @@
       height: 40px;
       text-decoration: none;
       display: inline-block;
-      vertical-align: middle;
       transition: all 0.3s ease;
     }
 
@@ -88,7 +100,6 @@
       background-color: #657ce6;
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(101, 124, 230, 0.3);
-      color: white !important;
     }
 
     h1 {
@@ -121,22 +132,53 @@
       text-decoration: none;
     }
 
-   
-
     section {
       margin-bottom: 2rem;
     }
+
+    /* Responsive styles */
+    @media (max-width: 600px) {
+      .nav-label {
+        display: block;
+      }
+
+      nav {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        margin-top: 10px;
+      }
+
+      .nav-toggle:checked + .nav-label + nav {
+        display: flex;
+      }
+
+      nav a, .bmc-button-nav {
+        width: 100%;
+        text-align: center;
+        margin: 5px 0;
+      }
+
+      .navbar {
+        border-bottom: none; /* Hide line on phones */
+      }
+    }
   </style>
 </head>
+
 <body>
   <div class="container">
+    <div class="navbar">
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+      <label for="nav-toggle" class="nav-label">&#9776; Menu</label>
 
-    <nav>
-      <a href="index.html">Home</a>
-      <a href="tutorial.html">YouTube Disable Guide</a>
-      <a href="about.html">About</a>
-      <a href="https://www.buymeacoffee.com/sergepov" target="_blank" class="bmc-button-nav">☕ Buy me a coffee</a>
-    </nav>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="tutorial.html">YouTube Disable Guide</a>
+        <a href="about.html">About</a>
+        <a href="https://www.buymeacoffee.com/sergepov" target="_blank" class="bmc-button-nav">☕ Buy me a coffee</a>
+      </nav>
+    </div>
 
     <h1>How to Remove or Block YouTube on Your Computer: A Complete Tutorial</h1>
 
@@ -170,7 +212,6 @@
         <li><a href="https://support.apple.com/en-us/105121" target="_blank" rel="noopener noreferrer">Apple Screen Time and Parental Controls</a></li>
       </ul>
     </section>
-
   </div>
 </body>
 </html>
