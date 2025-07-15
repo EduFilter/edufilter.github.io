@@ -12,10 +12,21 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>EduFilter</title>
+  <title>EduFilter – Search and Filter Educational YouTube Videos with AI</title>
+  <meta name="description"
+    content="EduFilter helps you find and watch educational YouTube videos filtered by AI to reduce distractions." />
+  <link rel="canonical" href="https://edufilter.github.io/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <!-- Social media metadata -->
+  <meta property="og:title" content="EduFilter – Educational YouTube Videos Only" />
+  <meta property="og:description" content="Use EduFilter to discover AI-selected educational YouTube videos with no distractions." />
+  <meta property="og:url" content="https://edufilter.github.io/" />
 
   <style>
-    * {
+    *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -35,14 +46,12 @@
       text-align: left;
     }
 
-    /* Navbar base styles */
+    /* Navbar */
     .navbar {
       border-bottom: 2px solid #7f99ff;
       padding-bottom: 10px;
       margin-bottom: 30px;
     }
-
-  
 
     .nav-toggle {
       display: none;
@@ -62,7 +71,7 @@
       align-items: center;
       gap: 25px;
       flex-wrap: wrap;
-      margin-top: 0px;
+      margin-top: 0;
     }
 
     nav a {
@@ -89,6 +98,7 @@
       line-height: 40px;
       display: inline-block;
       transition: all 0.3s ease;
+      text-decoration: none;
     }
 
     .bmc-button-nav:hover {
@@ -101,6 +111,7 @@
       color: #7f99ff;
       margin-bottom: 20px;
       text-align: center;
+      font-size: 2rem;
     }
 
     p {
@@ -130,13 +141,11 @@
         display: none;
         flex-direction: column;
         align-items: stretch;
-        
       }
 
-     .navbar {
-      border-bottom: 0px;
-    }
-
+      .navbar {
+        border-bottom: none;
+      }
 
       .nav-toggle:checked + .nav-label + nav {
         display: flex;
@@ -153,7 +162,6 @@
 
 <body>
   <div class="container">
-
     <div class="navbar">
       <input type="checkbox" id="nav-toggle" class="nav-toggle" />
       <label for="nav-toggle" class="nav-label">&#9776; Menu</label>
@@ -162,35 +170,31 @@
         <a href="index.html">Home</a>
         <a href="tutorial.html">YouTube Disable Guide</a>
         <a href="about.html">About</a>
-        <a href="https://www.buymeacoffee.com/sergepov" target="_blank" class="bmc-button-nav">☕ Buy me a coffee</a>
+        <a href="https://www.buymeacoffee.com/sergepov" target="_blank" rel="noopener noreferrer" class="bmc-button-nav">☕ Buy me a coffee</a>
       </nav>
     </div>
 
     <h1>EduFilter - About</h1>
 
-    <p>This site provides an AI-powered educational YouTube filter that helps users stay focused by limiting video searches to educational content only.</p>
+    <p>This site offers an AI-powered educational YouTube filter that helps you stay focused by limiting video searches to educational content only.</p>
 
-    <p>Please note that the filtering is powered by AI and based solely on the video titles. While designed to be helpful, it is not perfect—some non-educational videos may be allowed, and some educational ones may be missed.</p>
+    <p>Please note: filtering is AI-based and works primarily from video titles. While designed to be helpful, it’s not perfect — some non-educational videos may slip through, and some educational videos may be missed.</p>
 
-    <p>If you encounter any bugs, please report them via this 
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd-example" target="_blank" rel="noopener noreferrer">Google form</a> — it takes less than a minute to fill out.
-    </p>
+    <p>If you find any bugs, please report them via this
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSd-example" target="_blank" rel="noopener noreferrer">Google form</a>. It takes less than a minute to fill out.</p>
 
-    <p>For feedback, questions, or collaboration feel free to reach out to me at: 
+    <p>For feedback, questions, or collaboration, feel free to contact me at:
       <a href="mailto:serge.popov.pro@gmail.com">serge.popov.pro@gmail.com</a>
     </p>
 
-    <p>If you want to connect professionally, feel free to visit my 
+    <p>To connect professionally, visit my
       <a href="https://www.linkedin.com/in/serge-popov-ab0258201" target="_blank" rel="noopener noreferrer">LinkedIn profile</a>.
     </p>
 
-    <p>If you’d like to support the development of this tool, you can do so here: 
-      <a href="https://www.buymeacoffee.com/sergepov" target="_blank" rel="noopener noreferrer">Buy me a coffee☕</a>. 
-      Every little bit helps and is greatly appreciated!
-    </p>
+    <p>If you’d like to support the development of this tool, please consider
+      <a href="https://www.buymeacoffee.com/sergepov" target="_blank" rel="noopener noreferrer">buying me a coffee ☕</a>. Every bit helps and is greatly appreciated!</p>
 
-    <p>Thank you for sharing the project with others; your support helps a lot and makes it possible to reach more people!</p>
-
+    <p>Thank you for sharing this project with others — your support helps us reach more people!</p>
   </div>
 </body>
 </html>

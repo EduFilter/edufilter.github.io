@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Google tag (gtag.js) -->
+  <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VWNJ8M10X"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
@@ -12,24 +12,40 @@
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>EduFilter</title>
+  <title>EduFilter – Search and Filter Educational YouTube Videos with AI</title>
+  <meta name="description" content="EduFilter helps you watch educational YouTube videos filtered by AI to minimize distractions. Learn more with our embedded player and useful extensions." />
+  <link rel="canonical" href="https://edufilter.github.io/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+
+  <!-- Open Graph for social sharing -->
+  <meta property="og:title" content="EduFilter – Educational YouTube Videos Only" />
+  <meta property="og:description" content="Use EduFilter to discover AI-filtered educational YouTube videos without distractions." />
+  <meta property="og:url" content="https://edufilter.github.io/" />
 
   <style>
-    html {
+    /* Reset and base styles */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+        html {
       overflow-x: hidden;
       margin-right: calc(-1 * (100vw - 100%));
     }
 
-    * {
-      box-sizing: border-box;
+    body, h1, h2, p, a, nav, label, input, iframe {
       margin: 0;
       padding: 0;
+      font-family: Arial, sans-serif;
     }
 
     body {
-      font-family: Arial, sans-serif;
       background-color: #f9f9f9;
       color: #333;
+      line-height: 1.6;
       padding: 20px;
       text-align: center;
     }
@@ -37,10 +53,9 @@
     .container {
       max-width: 800px;
       margin: 0 auto;
-      text-align: center;
     }
 
-    /* Responsive Navbar styles */
+    /* Navbar */
     .navbar {
       border-bottom: 2px solid #7f99ff;
       padding-bottom: 10px;
@@ -57,6 +72,8 @@
       cursor: pointer;
       user-select: none;
       color: #7f99ff;
+      text-align: right;
+      margin-bottom: 10px;
     }
 
     nav {
@@ -72,17 +89,19 @@
       font-weight: bold;
       text-decoration: none;
       line-height: 40px;
-      transition: color 0.3s;
+      transition: color 0.3s ease;
     }
 
-    nav a:hover {
+    nav a:hover,
+    nav a:focus {
       text-decoration: underline;
       color: #657ce6;
+      outline: none;
     }
 
     .bmc-button-nav {
       background-color: #7f99ff;
-      color: white !important;
+      color: #fff !important;
       border-radius: 4px;
       border: 2px solid #657ce6;
       box-shadow: 0 2px 8px rgba(127, 153, 255, 0.2);
@@ -93,43 +112,40 @@
       transition: all 0.3s ease;
     }
 
-    .bmc-button-nav:hover {
+    .bmc-button-nav:hover,
+    .bmc-button-nav:focus {
       background-color: #657ce6;
       transform: translateY(-1px);
       box-shadow: 0 4px 12px rgba(101, 124, 230, 0.3);
+      text-decoration: none;
+      outline: none;
     }
 
-    /* Responsive styles */
+    /* Responsive navbar */
     @media (max-width: 600px) {
       .nav-label {
         display: block;
-        text-align: right;
-        margin-bottom: 10px;
       }
-
       nav {
         display: none;
         flex-direction: column;
         align-items: stretch;
       }
-
-      .navbar {
-        border-bottom: 0px;
-      }
-
       .nav-toggle:checked + .nav-label + nav {
         display: flex;
       }
-
       nav a,
       .bmc-button-nav {
         width: 100%;
         text-align: center;
         margin: 5px 0;
       }
+      .navbar {
+        border-bottom: none;
+      }
     }
 
-    /* Page-specific styles */
+    /* Informational message */
     .message {
       max-width: 700px;
       margin: 0 auto 20px;
@@ -141,94 +157,116 @@
       color: #7f99ff;
       text-decoration: underline;
     }
+    .message a:hover,
+    .message a:focus {
+      color: #657ce6;
+      outline: none;
+    }
 
- .hytPlayerWrapOuter {
-  max-width: 100%;
-  padding: 0 20px;
-  margin-bottom: 20px;
-  display: flex;
-  justify-content: center;
-}
+    /* Video player wrapper */
+    .video-player-wrapper {
+      max-width: 100%;
+      padding: 0 20px;
+      margin-bottom: 20px;
+      display: flex;
+      justify-content: center;
+    }
 
-.hytPlayerWrap {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%;   /* 16:9 aspect ratio */
-  background-color: #000;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
-  transition: box-shadow 0.3s ease;
-}
+    .video-player {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%; /* 16:9 aspect ratio */
+      background-color: #000;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: box-shadow 0.3s ease;
+    }
 
-.hytPlayerWrap:hover {
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
-}
+    .video-player:hover,
+    .video-player:focus-within {
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3);
+    }
 
-.hytPlayerWrap iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  display: block;  /* helps some browsers */
-}
+    .video-player iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
 
-
+    /* Back link */
     .back-link {
       margin-top: 20px;
       display: inline-block;
       color: #7f99ff;
       text-decoration: none;
       font-weight: bold;
-      transition: color 0.3s;
+      transition: color 0.3s ease;
     }
 
-    .back-link:hover {
+    .back-link:hover,
+    .back-link:focus {
       color: #657ce6;
+      outline: none;
     }
   </style>
 </head>
 
 <body>
   <div class="container">
+    <header class="navbar" role="navigation" aria-label="Primary navigation">
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" aria-controls="primary-menu" aria-expanded="false" />
+      <label for="nav-toggle" class="nav-label" aria-haspopup="true" aria-controls="primary-menu" aria-expanded="false">&#9776; Menu</label>
 
-    <div class="navbar">
-      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
-      <label for="nav-toggle" class="nav-label">&#9776; Menu</label>
-
-      <nav>
+      <nav id="primary-menu">
         <a href="index.html">Home</a>
         <a href="tutorial.html">YouTube Disable Guide</a>
         <a href="about.html">About</a>
-        <a href="https://www.buymeacoffee.com/sergepov" target="_blank" class="bmc-button-nav">☕ Buy me a coffee</a>
+        <a href="https://www.buymeacoffee.com/sergepov" target="_blank" rel="noopener noreferrer" class="bmc-button-nav">☕ Buy me a coffee</a>
       </nav>
-    </div>
+    </header>
 
-    <div class="message">
-      YouTube doesn't allow blocking ads or recommendations in embedded videos.<br />
-      But you can use extensions like
-      <a href="https://chromewebstore.google.com/detail/adguard-adblocker/bgnkhhnnamicmpeenaelnjfhikgbkllg" target="_blank" rel="noopener noreferrer">AdGuard</a>
-      (ad blocker) and
-      <a href="https://chromewebstore.google.com/detail/unhook-remove-youtube-rec/khncfooichmfjbepaaaebmommgaepoid" target="_blank" rel="noopener noreferrer">Unhook</a>
-      (recommendation blocker).
-    </div>
+    <section class="message" role="region" aria-live="polite" aria-atomic="true">
+      <p>
+        YouTube does not allow blocking ads or recommendations in embedded videos. However, you can use
+        <a href="https://chrome.google.com/webstore/detail/adguard-adblocker/bgnkhhnnamicmpeenaelnjfhikgbkllg" target="_blank" rel="noopener noreferrer">AdGuard</a>
+        (ad blocker) and
+        <a href="https://chrome.google.com/webstore/detail/unhook-remove-youtube-rec/khncfooichmfjbepaaaebmommgaepoid" target="_blank" rel="noopener noreferrer">Unhook</a>
+        (recommendation blocker) extensions to reduce distractions.
+      </p>
+    </section>
 
-    <div class="hytPlayerWrapOuter">
-      <div class="hytPlayerWrap">
-        <iframe id="videoPlayer" allowfullscreen></iframe>
+    <section class="video-player-wrapper" aria-label="YouTube video player">
+      <div class="video-player">
+        <iframe
+          id="videoPlayer"
+          title="Educational YouTube video player"
+          allowfullscreen
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          sandbox="allow-same-origin allow-scripts allow-presentation allow-popups"
+        ></iframe>
       </div>
-    </div>
+    </section>
 
-    <a class="back-link" href="index.html">← Back to Search</a>
+    <a href="index.html" class="back-link" aria-label="Back to search page">← Back to Search</a>
   </div>
 
   <script>
+    // Fetch videoID from URL parameters
     const params = new URLSearchParams(window.location.search);
     const videoID = params.get('videoID');
+
+    // Validate videoID before using
     const iframe = document.getElementById('videoPlayer');
-    iframe.src = `https://www.youtube.com/embed/${videoID}?origin=https://edufilter.github.io`;
+    if (videoID && /^[a-zA-Z0-9_-]{11}$/.test(videoID)) {
+      iframe.src = `https://www.youtube.com/embed/${videoID}?origin=https://edufilter.github.io`;
+    } else {
+      iframe.srcdoc = '<p style="color:white; text-align:center; padding:1rem;">Invalid or missing video ID.</p>';
+    }
   </script>
 </body>
 </html>

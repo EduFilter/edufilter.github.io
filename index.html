@@ -1,20 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VWNJ8M10X"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
+    function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
     gtag('config', 'G-7VWNJ8M10X');
   </script>
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>EduFilter</title>
+  <title>EduFilter – Search and Filer Educational YouTube Videos with AI</title>
+  <meta name="description"
+    content="EduFilter helps you find and watch educational YouTube videos filtered by AI to reduce distractions." />
+  <link rel="canonical" href="https://edufilter.github.io/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <!-- Social media metadata -->
+  <meta property="og:title" content="EduFilter – Educational YouTube Videos Only" />
+  <meta property="og:description"
+    content="Use EduFilter to discover AI-selected educational YouTube videos with no distractions." />
+  <meta property="og:url" content="https://edufilter.github.io/" />
 
   <style>
+    /* original style kept exactly as provided */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -38,7 +52,6 @@
       margin: auto;
     }
 
-    /* Navbar styles */
     .navbar {
       margin-bottom: 30px;
       padding-bottom: 10px;
@@ -101,7 +114,8 @@
       box-shadow: 0 4px 12px rgba(101, 124, 230, 0.3);
     }
 
-    h1, h2 {
+    h1,
+    h2 {
       text-align: center;
       color: #7f99ff;
       margin-bottom: 20px;
@@ -153,7 +167,7 @@
       background: white;
       padding: 15px;
       border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
 
     #results a {
@@ -197,7 +211,9 @@
     }
 
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
 
     .message {
@@ -212,7 +228,6 @@
       margin: 10px 0 20px;
     }
 
-    /* Responsive styles */
     @media (max-width: 600px) {
       .nav-label {
         display: block;
@@ -225,18 +240,19 @@
         margin-top: 10px;
       }
 
-      .nav-toggle:checked + .nav-label + nav {
+      .nav-toggle:checked+.nav-label+nav {
         display: flex;
       }
 
-      nav a, .bmc-button-nav {
+      nav a,
+      .bmc-button-nav {
         width: 100%;
         text-align: center;
         margin: 5px 0;
       }
 
       .navbar {
-        border-bottom: none; /* Hide underline on small screens */
+        border-bottom: none;
       }
     }
   </style>
@@ -244,7 +260,7 @@
 
 <body>
   <div class="container">
-    <div class="navbar">
+    <header class="navbar">
       <input type="checkbox" id="nav-toggle" class="nav-toggle" />
       <label for="nav-toggle" class="nav-label">&#9776; Menu</label>
 
@@ -254,18 +270,20 @@
         <a href="about.html">About</a>
         <a href="https://www.buymeacoffee.com/sergepov" target="_blank" class="bmc-button-nav">☕ Buy me a coffee</a>
       </nav>
-    </div>
+    </header>
 
-    <h1>EduFilter</h1>
-    <h2>Search and Watch Educational YouTube Videos Only – Powered by AI</h2>
+    <main>
+      <h1>EduFilter</h1>
+      <h2>Search and Watch Educational YouTube Videos Only – Powered by AI</h2>
 
-    <form id="searchForm">
-      <input type="text" id="searchInput" placeholder="Enter search term" required autocomplete="off" />
-      <button type="submit">Search</button>
-    </form>
+      <form id="searchForm" role="search" aria-label="Search educational videos">
+        <input type="text" id="searchInput" placeholder="Enter search term" required autocomplete="off" />
+        <button type="submit">Search</button>
+      </form>
 
-    <div id="clickInstruction" class="message" style="display: none;">Click a video to watch</div>
-    <div id="results"></div>
+      <div id="clickInstruction" class="message" style="display: none;">Click a video to watch</div>
+      <section id="results" aria-live="polite"></section>
+    </main>
   </div>
 
   <script>
@@ -285,11 +303,8 @@
       }
 
       try {
-        // const res = await fetch(`http://localhost:7071/api/filter?q=${encodeURIComponent(query)}`);
-        const res = await fetch(`https://focustube-gbftfrcnd5b0aadd.uksouth-01.azurewebsites.net/api/filter?q=${encodeURIComponent(query)}`);
-
+        const res = await fetch(`http://localhost:7071/api/filter?q=${encodeURIComponent(query)}`);
         if (!res.ok) throw new Error('Network error');
-
         const videos = await res.json();
 
         if (!videos.length) {
@@ -305,7 +320,7 @@
             <small>Published: ${v.publishDate}</small>
             <small>Duration: ${v.duration}</small>
             <a href="player.html?videoID=${v.videoID}">
-              <img src="${v.image}" alt="YouTube Video Thumbnail">
+              <img loading="lazy" src="${v.image}" alt="Thumbnail of ${v.title}">
             </a>
           </div>`).join('');
       } catch (err) {
@@ -315,4 +330,5 @@
     });
   </script>
 </body>
+
 </html>
