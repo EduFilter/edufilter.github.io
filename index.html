@@ -23,8 +23,7 @@
   <link rel="manifest" href="/site.webmanifest">
   <!-- Social media metadata -->
   <meta property="og:title" content="EduFilter – Educational YouTube Videos Only" />
-  <meta property="og:description"
-    content="Use EduFilter to filter educational YouTube videos." />
+  <meta property="og:description" content="Use EduFilter to filter educational YouTube videos." />
   <meta property="og:url" content="https://edufilter.github.io/" />
 
   <style>
@@ -321,9 +320,9 @@
             <a href="player.html?videoID=${v.videoID}">${v.title}</a> 
             <small>Published: ${v.publishDate}</small>
             <small>Duration: ${v.duration}</small>
-            <a href="player.html?videoID=${v.videoID}">
-              <img loading="lazy" src="${v.image}" alt="Thumbnail of ${v.title}">
-            </a>
+                  <a href="player.html?videoID=${v.videoID}">
+                    <img src="${v.image}" alt="Thumbnail of ${v.title}" style="width: 100%; height: 100%; object-fit: cover; position: relative;  aspect-ratio: 16 / 9;">
+                  </a>
           </div>`).join('');
       } catch (err) {
         console.error(err);
