@@ -14,20 +14,18 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EduFilter – Search and Filter Educational YouTube Videos with AI</title>
-  <meta name="description"
-    content="EduFilter helps you to find and watch educational YouTube videos filtered by AI to reduce distractions." />
+  <meta name="description" content="EduFilter helps you to find and watch educational YouTube videos filtered by AI to reduce distractions." />
   <link rel="canonical" href="https://edufilter.github.io/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
   <link rel="manifest" href="/site.webmanifest">
-  <!-- Social media metadata -->
   <meta property="og:title" content="EduFilter – Educational YouTube Videos Only" />
   <meta property="og:description" content="Use EduFilter to filter educational YouTube videos." />
   <meta property="og:url" content="https://edufilter.github.io/" />
 
   <style>
-    /* original style kept exactly as provided */
+    /* styles kept unchanged */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -39,17 +37,20 @@
       margin-right: calc(-1 * (100vw - 100%));
     }
 
-    body {
-      font-family: Arial, sans-serif;
-      background: #f9f9f9;
-      color: #333;
-      padding: 20px;
-    }
+body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  color: #333;
+  padding: 20px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
 
-    .container {
-      max-width: 800px;
-      margin: auto;
-    }
+.container {
+  max-width: 800px;
+  width: 100%;
+  margin: auto;
+}
 
     .navbar {
       margin-bottom: 30px;
@@ -181,17 +182,20 @@
       text-decoration: underline;
     }
 
+    #results img {
+
+  border-radius: 4px;
+  margin-top: 10px;
+
+}
+
     #results small {
       color: #666;
       display: block;
       margin-bottom: 5px;
     }
 
-    #results img {
-      width: 100%;
-      border-radius: 4px;
-      margin-top: 10px;
-    }
+
 
     .loader {
       display: flex;
@@ -262,7 +266,6 @@
     <header class="navbar">
       <input type="checkbox" id="nav-toggle" class="nav-toggle" />
       <label for="nav-toggle" class="nav-label">&#9776; Menu</label>
-
       <nav>
         <a href="index.html">Home</a>
         <a href="tutorial.html">YouTube Disable Guide</a>
@@ -289,22 +292,52 @@
     const form = document.getElementById('searchForm');
     const resultsDiv = document.getElementById('results');
     const instructionDiv = document.getElementById('clickInstruction');
+    const searchInput = document.getElementById('searchInput');
+
+    const saveToStorage = (query, videos) => {
+      localStorage.setItem('lastQuery', query);
+      localStorage.setItem('lastResults', JSON.stringify(videos));
+    };
+
+    const loadFromStorage = () => {
+      const query = localStorage.getItem('lastQuery');
+      const videos = JSON.parse(localStorage.getItem('lastResults') || '[]');
+      if (query && videos.length) {
+        searchInput.value = query;
+        renderVideos(videos);
+      }
+    };
+
+    const renderVideos = (videos) => {
+      instructionDiv.style.display = 'block';
+      resultsDiv.innerHTML = videos.map(v => `
+        <div>
+          <a href="player.html?videoID=${v.videoID}">${v.title}</a> 
+          <small>Published: ${v.publishDate}</small>
+          <small>Duration: ${v.duration}</small>
+          <small>Views: ${v.viewCount}</small>
+          <a href="player.html?videoID=${v.videoID}">
+            <img src="${v.image}" alt="Thumbnail of ${v.title}" style="width: 100%; height: auto; max-width: 100%; object-fit: cover; aspect-ratio: 16 / 9;">
+          </a>
+        </div>`).join('');
+    };
+
+
+
 
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       resultsDiv.innerHTML = '<div class="loader"></div>';
       instructionDiv.style.display = 'none';
 
-      const query = document.getElementById('searchInput').value.trim();
+      const query = searchInput.value.trim();
       if (!query) {
         resultsDiv.innerHTML = '<div class="message error">Please enter a search term.</div>';
         return;
       }
 
       try {
-        const res = await fetch(`https://focustube-gbftfrcnd5b0aadd.uksouth-01.azurewebsites.net/api/filter?q=${encodeURIComponent(query)}`);
-        // const res = await fetch(`http://localhost:7071/api/filter?q=${encodeURIComponent(query)}`);
-
+        const res = await fetch(`http://localhost:7071/api/filter?q=${encodeURIComponent(query)}`);
         if (!res.ok) throw new Error('Network error');
         const videos = await res.json();
 
@@ -313,22 +346,17 @@
           return;
         }
 
-        instructionDiv.style.display = 'block';
+        saveToStorage(query, videos);
+        renderVideos(videos);
 
-        resultsDiv.innerHTML = videos.map(v => `
-          <div>
-            <a href="player.html?videoID=${v.videoID}">${v.title}</a> 
-            <small>Published: ${v.publishDate}</small>
-            <small>Duration: ${v.duration}</small>
-                  <a href="player.html?videoID=${v.videoID}">
-                    <img src="${v.image}" alt="Thumbnail of ${v.title}" style="width: 100%; height: 100%; object-fit: cover; position: relative;  aspect-ratio: 16 / 9;">
-                  </a>
-          </div>`).join('');
       } catch (err) {
         console.error(err);
         resultsDiv.innerHTML = '<div class="message error">⚠️ Failed to load videos. Please try again later.</div>';
       }
     });
+
+    // Load previous results if present
+    window.addEventListener('load', loadFromStorage);
   </script>
 </body>
 
