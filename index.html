@@ -15,7 +15,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EduFilter – Search and Filter Educational YouTube Videos with AI</title>
   <meta name="description"
-    content="EduFilter helps you find and watch educational YouTube videos filtered by AI to reduce distractions." />
+    content="EduFilter helps you to find and watch educational YouTube videos filtered by AI to reduce distractions." />
   <link rel="canonical" href="https://edufilter.github.io/" />
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -24,7 +24,7 @@
   <!-- Social media metadata -->
   <meta property="og:title" content="EduFilter – Educational YouTube Videos Only" />
   <meta property="og:description"
-    content="Use EduFilter to discover AI-selected educational YouTube videos with no distractions." />
+    content="Use EduFilter to filter educational YouTube videos." />
   <meta property="og:url" content="https://edufilter.github.io/" />
 
   <style>
@@ -303,8 +303,8 @@
       }
 
       try {
-        const res = await fetch(`https://focustube-gbftfrcnd5b0aadd.uksouth-01.azurewebsites.net/api/filter?q=${encodeURIComponent(query)}`);
-        //const res = await fetch(`http://localhost:7071/api/filter?q=${encodeURIComponent(query)}`);
+        // const res = await fetch(`https://focustube-gbftfrcnd5b0aadd.uksouth-01.azurewebsites.net/api/filter?q=${encodeURIComponent(query)}`);
+        const res = await fetch(`http://localhost:7071/api/filter?q=${encodeURIComponent(query)}`);
 
         if (!res.ok) throw new Error('Network error');
         const videos = await res.json();
