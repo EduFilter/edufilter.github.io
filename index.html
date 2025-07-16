@@ -303,8 +303,8 @@
       }
 
       try {
-        // const res = await fetch(`https://focustube-gbftfrcnd5b0aadd.uksouth-01.azurewebsites.net/api/filter?q=${encodeURIComponent(query)}`);
-        const res = await fetch(`http://localhost:7071/api/filter?q=${encodeURIComponent(query)}`);
+        const res = await fetch(`https://focustube-gbftfrcnd5b0aadd.uksouth-01.azurewebsites.net/api/filter?q=${encodeURIComponent(query)}`);
+        //const res = await fetch(`http://localhost:7071/api/filter?q=${encodeURIComponent(query)}`);
 
         if (!res.ok) throw new Error('Network error');
         const videos = await res.json();
