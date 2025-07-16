@@ -295,13 +295,13 @@ body {
     const searchInput = document.getElementById('searchInput');
 
     const saveToStorage = (query, videos) => {
-      localStorage.setItem('lastQuery', query);
-      localStorage.setItem('lastResults', JSON.stringify(videos));
+      sessionStorage.setItem('lastQuery', query);
+      sessionStorage.setItem('lastResults', JSON.stringify(videos));
     };
 
     const loadFromStorage = () => {
-      const query = localStorage.getItem('lastQuery');
-      const videos = JSON.parse(localStorage.getItem('lastResults') || '[]');
+      const query = sessionStorage.getItem('lastQuery');
+      const videos = JSON.parse(sessionStorage.getItem('lastResults') || '[]');
       if (query && videos.length) {
         searchInput.value = query;
         renderVideos(videos);
