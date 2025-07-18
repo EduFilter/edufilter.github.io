@@ -10,6 +10,9 @@
     gtag('js', new Date());
     gtag('config', 'G-7VWNJ8M10X');
   </script>
+  <script src="https://www.google.com/recaptcha/api.js"></script>
+
+
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -283,6 +286,9 @@ body {
       </nav>
     </header>
 
+
+
+
     <main>
       <h1>EduFilter</h1>
       <h2>Search and Watch Educational YouTube Videos Only – Powered by AI</h2>
@@ -290,8 +296,11 @@ body {
       <form id="searchForm" role="search" aria-label="Search educational videos">
         <input type="text" name="website" id="honeypot" style="display:none">
         <input type="text" id="searchInput" placeholder="Enter search term" required autocomplete="off" />
+        <div class="g-recaptcha" data-sitekey="6LfF5YcrAAAAAJeNSAkfA8sWHxzliik0I8ioJYlI"></div>
         <button type="submit">Search</button>
       </form>
+
+
 
       <div id="clickInstruction" class="message" style="display: none;">Click a video to watch</div>
       <section id="results" aria-live="polite"></section>
