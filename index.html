@@ -257,6 +257,15 @@ body {
       .navbar {
         border-bottom: none;
       }
+
+      .honeypot {
+  display: none;
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  height: 0;
+  width: 0;
+}
     }
   </style>
 </head>
@@ -279,6 +288,7 @@ body {
       <h2>Search and Watch Educational YouTube Videos Only – Powered by AI</h2>
 
       <form id="searchForm" role="search" aria-label="Search educational videos">
+        <input type="text" name="website" id="honeypot" style="display:none">
         <input type="text" id="searchInput" placeholder="Enter search term" required autocomplete="off" />
         <button type="submit">Search</button>
       </form>
@@ -325,41 +335,59 @@ body {
 
 
 
-    form.addEventListener('submit', async (e) => {
-      e.preventDefault();
-      resultsDiv.innerHTML = '<div class="loader"></div>';
-      instructionDiv.style.display = 'none';
 
-      const query = searchInput.value.trim();
-      if (!query) {
-        resultsDiv.innerHTML = '<div class="message error">Please enter a search term.</div>';
-        return;
-      }
+   form.addEventListener('submit', async (e) => {
+  e.preventDefault();
 
-      try {
-        // const res = await fetch(`http://localhost:7071/api/filter?q=${encodeURIComponent(query)}`);
-        const res = await fetch(`https://focustube-gbftfrcnd5b0aadd.uksouth-01.azurewebsites.net/api/filter?q=${encodeURIComponent(query)}`);
+  const honeypotValue = document.getElementById('honeypot').value;
 
-        if (!res.ok) throw new Error('Network error');
-        const videos = await res.json();
-
-        if (!videos.length) {
-          resultsDiv.innerHTML = '<div class="message info">No results found or the content isn’t education-related</div>';
-          return;
-        }
-
-        saveToStorage(query, videos);
-        renderVideos(videos);
-
-      } catch (err) {
-        console.error(err);
-        resultsDiv.innerHTML = '<div class="message error">⚠️ Failed to load videos. Please try again later.</div>';
-      }
+  if (honeypotValue) {
+    // Bot detected — send to Azure Function and stop here
+    await fetch('https://your-azure-function-url.azurewebsites.net/api/logBot', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        timestamp: new Date().toISOString(),
+        honeypotValue,
+        userAgent: navigator.userAgent
+      })
     });
+    console.warn("Bot detected and reported.");
+    return; // prevent further processing
+  }
 
-    // Load previous results if present
-    window.addEventListener('load', loadFromStorage);
-  </script>
+  // If no honeypot value, continue with legitimate search
+  resultsDiv.innerHTML = '<div class="loader"></div>';
+  instructionDiv.style.display = 'none';
+
+  const query = searchInput.value.trim();
+  if (!query) {
+    resultsDiv.innerHTML = '<div class="message error">Please enter a search term.</div>';
+    return;
+  }
+
+  try {
+    const res = await fetch(`https://focustube-gbftfrcnd5b0aadd.uksouth-01.azurewebsites.net/api/filter?q=${encodeURIComponent(query)}`);
+    if (!res.ok) throw new Error('Network error');
+    const videos = await res.json();
+
+    if (!videos.length) {
+      resultsDiv.innerHTML = '<div class="message info">No results found or the content isn’t education-related</div>';
+      return;
+    }
+
+    saveToStorage(query, videos);
+    renderVideos(videos);
+  } catch (err) {
+    console.error(err);
+    resultsDiv.innerHTML = '<div class="message error">⚠️ Failed to load videos. Please try again later.</div>';
+  }
+});
+</script>
+
+
 </body>
 
 </html>
