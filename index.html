@@ -293,12 +293,18 @@ body {
       <h1>EduFilter</h1>
       <h2>Search and Watch Educational YouTube Videos Only – Powered by AI</h2>
 
-      <form id="searchForm" role="search" aria-label="Search educational videos">
-        <input type="text" name="website" id="honeypot" style="display:none">
-        <input type="text" id="searchInput" placeholder="Enter search term" required autocomplete="off" />
-        <div class="g-recaptcha" data-sitekey="6LfF5YcrAAAAAJeNSAkfA8sWHxzliik0I8ioJYlI"></div>
-        <button type="submit">Search</button>
-      </form>
+      <div id="captchaWrapper">
+  <div class="g-recaptcha"
+       data-sitekey="6Lf99ocrAAAAAF-_h-s25979h4GeUBfy6QIOeDG3"
+       data-callback="onCaptchaSuccess">
+  </div>
+</div>
+
+<form id="searchForm" role="search" aria-label="Search educational videos" style="display: none;">
+  <input type="text" name="website" id="honeypot" style="display:none">
+  <input type="text" id="searchInput" placeholder="Enter search term" required autocomplete="off" />
+  <button type="submit">Search</button>
+</form>
 
 
 
@@ -308,6 +314,11 @@ body {
   </div>
 
   <script>
+
+    function onCaptchaSuccess() {
+  document.getElementById('captchaWrapper').style.display = 'none';
+  document.getElementById('searchForm').style.display = 'flex'; // Show form
+}
     const form = document.getElementById('searchForm');
     const resultsDiv = document.getElementById('results');
     const instructionDiv = document.getElementById('clickInstruction');
