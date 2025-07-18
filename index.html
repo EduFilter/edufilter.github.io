@@ -374,7 +374,7 @@ body {
     const videos = await res.json();
 
     if (!videos.length) {
-      resultsDiv.innerHTML = '<div class="message info">No results found or the content isn’t education-related</div>';
+      resultsDiv.innerHTML = '<div class="message info">None of the top YouTube search results for your query appeared to be educational.</div>';
       return;
     }
 
