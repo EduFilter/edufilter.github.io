@@ -11,8 +11,6 @@
     gtag('config', 'G-7VWNJ8M10X');
   </script>
 
-
-
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>EduFilter – Search and Filter Educational YouTube Videos with AI</title>
@@ -285,21 +283,15 @@ body {
       </nav>
     </header>
 
-
-
-
     <main>
       <h1>EduFilter</h1>
       <h2>Search and Watch Educational YouTube Videos Only – Powered by AI</h2>
 
-
-
-<form id="searchForm" action="" method="POST">
-  <input type="text" id="searchInput" placeholder="Enter search term" required />
-  <button id="searchBtn" type="button">Search</button>
-</form>
-
-
+      <form id="searchForm" role="search" aria-label="Search educational videos">
+        <input type="text" name="website" id="honeypot" style="display:none">
+        <input type="text" id="searchInput" placeholder="Enter search term" required autocomplete="off" />
+        <button type="submit">Search</button>
+      </form>
 
       <div id="clickInstruction" class="message" style="display: none;">Click a video to watch</div>
       <section id="results" aria-live="polite"></section>
@@ -307,8 +299,6 @@ body {
   </div>
 
   <script>
-
-
     const form = document.getElementById('searchForm');
     const resultsDiv = document.getElementById('results');
     const instructionDiv = document.getElementById('clickInstruction');
@@ -396,8 +386,6 @@ body {
   }
 });
 </script>
-
-
 
 
 </body>
