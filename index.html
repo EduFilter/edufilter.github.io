@@ -293,17 +293,18 @@ body {
         <button type="submit">Search</button>
       </form>
 
-      <div  class="message" style="margin-top: 0px; padding-top: 0px;">💡 You can enter additional terms like <em>course</em> or <em>tutorial</em> to get more results.</div>
-
-      <div id="clickInstruction" class="message" style="display: none; margin-bottom: 0px; padding-bottom: 0px; font-size: 2rem;">Click a video to watch</div>
+      <div id="clickInstruction" class="message" style="display: none; margin-bottom: 15px; padding-bottom: 0px; font-size: 1.5rem;">Click a video to watch</div>
       
-      <section id="results" aria-live="polite"></section>
+      <section class="results" aria-live="polite"></section>
+
+            <div  class="results" style="margin-top: 0px; padding-top: 0px;">💡 You can enter additional terms like <em>course</em> or <em>tutorial</em> to get more results.</div>
+
     </main>
   </div>
 
   <script>
     const form = document.getElementById('searchForm');
-    const resultsDiv = document.getElementById('results');
+    const resultsDiv = document.getElementsByClassName('results');
     const instructionDiv = document.getElementById('clickInstruction');
     const searchInput = document.getElementById('searchInput');
 
