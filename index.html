@@ -227,7 +227,7 @@ body {
       border-radius: 6px;
     }
 
-    .clickInstruction {
+    #clickInstruction {
       margin: 10px 0 20px;
     }
 
@@ -292,10 +292,9 @@ body {
         <input type="text" id="searchInput" placeholder="Enter search term" required autocomplete="off" />
         <button type="submit">Search</button>
       </form>
-      <div  class="message" style="margin-top: 0px; padding-top: 0px;">💡 You can enter additional terms like <em>course</em> or <em>tutorial</em> to get more results.</div>
 
-
-      <div class="message" id="clickInstruction" style="display: none;">Click a video to watch</div>
+      <div id="clickInstruction" class="message" style="display: none;">Click a video to watch</div>
+      
       <section id="results" aria-live="polite"></section>
     </main>
   </div>
