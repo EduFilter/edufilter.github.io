@@ -293,19 +293,22 @@ body {
         <button type="submit">Search</button>
       </form>
 
+
       <div id="clickInstruction" class="message" style="display: none; margin-bottom: 15px; padding-bottom: 0px; font-size: 1.5rem;">Click a video to watch</div>
       
-      <section class="results" aria-live="polite"></section>
+      <section id="results" aria-live="polite"></section>
 
-            <div  class="results" style="margin-top: 0px; padding-top: 0px;">💡 You can enter additional terms like <em>course</em> or <em>tutorial</em> to get more results.</div>
+        <div id="searchInstruction" class="message" style="display: none; margin-top: 0px; padding-top: 0px;">💡 You can enter additional terms like <em>course</em> or <em>tutorial</em> to get more results.</div>
 
     </main>
   </div>
 
   <script>
     const form = document.getElementById('searchForm');
-    const resultsDiv = document.getElementsByClassName('results');
+    const resultsDiv = document.getElementById('results');
     const instructionDiv = document.getElementById('clickInstruction');
+    const instructionSearchDiv = document.getElementById('searchInstruction');
+
     const searchInput = document.getElementById('searchInput');
 
     const saveToStorage = (query, videos) => {
@@ -324,6 +327,8 @@ body {
 
     const renderVideos = (videos) => {
       instructionDiv.style.display = 'block';
+      instructionSearchDiv.style.display = 'block';
+
       resultsDiv.innerHTML = videos.map(v => `
         <div>
           <a href="player.html?videoID=${v.videoID}">${v.title}</a> 
