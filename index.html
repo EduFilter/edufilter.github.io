@@ -352,7 +352,7 @@ body {
 
   if (honeypotValue) {
     // Bot detected — send to Azure Function and stop here
-    await fetch('https://focustube-gbftfrcnd5b0aadd.uksouth-01.azurewebsites.net/api/logBot', {
+    await fetch('https://edufilter.azurewebsites.net/api/logBot', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -380,7 +380,7 @@ body {
   }
 
   try {
-    const res = await fetch(`https://focustube-gbftfrcnd5b0aadd.uksouth-01.azurewebsites.net/api/filter?q=${encodeURIComponent(query)}`);
+    const res = await fetch(`https://edufilter.azurewebsites.net/api/filter?q=${encodeURIComponent(query)}`);
     if (!res.ok) throw new Error('Network error');
     const videos = await res.json();
 
