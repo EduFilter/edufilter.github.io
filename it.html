@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-7VWNJ8M10X"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+    gtag('config', 'G-7VWNJ8M10X');
+  </script>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EduFilter – Search and Filter Educational YouTube Videos with AI</title>
+  <meta name="description" content="EduFilter helps you to find and watch educational YouTube videos filtered by AI to reduce distractions." />
+  <link rel="canonical" href="https://edufilter.github.io/" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <meta property="og:title" content="EduFilter – Educational YouTube Videos Only" />
+  <meta property="og:description" content="Use EduFilter to filter educational YouTube videos." />
+  <meta property="og:url" content="https://edufilter.github.io/" />
+
+  <style>
+    /* styles kept unchanged */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      overflow-x: hidden;
+      margin-right: calc(-1 * (100vw - 100%));
+    }
+
+body {
+  font-family: Arial, sans-serif;
+  background: #f9f9f9;
+  color: #333;
+  padding: 20px;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+.container {
+  max-width: 800px;
+  width: 100%;
+  margin: auto;
+}
+
+    .navbar {
+      margin-bottom: 30px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid #7f99ff;
+    }
+
+    .nav-toggle {
+      display: none;
+    }
+
+    .nav-label {
+      display: none;
+      font-size: 24px;
+      color: #7f99ff;
+      cursor: pointer;
+      user-select: none;
+      text-align: right;
+      margin-bottom: 10px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 25px;
+    }
+
+    nav a:not(.bmc-button-nav) {
+      color: #7f99ff;
+      font-weight: bold;
+      text-decoration: none;
+      line-height: 40px;
+      white-space: nowrap;
+      transition: color 0.3s;
+    }
+
+    nav a:not(.bmc-button-nav):hover {
+      text-decoration: underline;
+      color: #657ce6;
+    }
+
+    .bmc-button-nav {
+      background-color: #7f99ff;
+      color: white !important;
+      font-weight: bold;
+      border-radius: 4px;
+      border: 2px solid #657ce6;
+      box-shadow: 0 2px 8px rgba(127, 153, 255, 0.2);
+      padding: 0 12px;
+      line-height: 40px;
+      height: 40px;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .bmc-button-nav:hover {
+      background-color: #657ce6;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(101, 124, 230, 0.3);
+    }
+
+    h1,
+    h2 {
+      text-align: center;
+      color: #7f99ff;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      padding: 10px;
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 4px 0 0 4px;
+      font-size: 1rem;
+      outline: none;
+    }
+
+    button {
+      padding: 10px 16px;
+      font-size: 1rem;
+      background: #7f99ff;
+      color: white;
+      border: none;
+      border-radius: 0 4px 4px 0;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background: #657ce6;
+    }
+
+    #results {
+      max-width: 800px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+
+    #results div {
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    #results a {
+      color: #7f99ff;
+      font-weight: bold;
+      text-decoration: none;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    #results a:hover {
+      text-decoration: underline;
+    }
+
+    #results img {
+
+  border-radius: 4px;
+  margin-top: 10px;
+
+}
+
+    #results small {
+      color: #666;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+
+
+    .loader {
+      display: flex;
+      justify-content: center;
+      margin: 40px 0;
+    }
+
+    .loader::after {
+      content: "";
+      width: 40px;
+      height: 40px;
+      border: 4px solid #ccc;
+      border-top-color: #7f99ff;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 1.1rem;
+      padding: 15px;
+      border-radius: 6px;
+    }
+
+    #clickInstruction {
+      margin: 10px 0 20px;
+    }
+
+    @media (max-width: 600px) {
+      .nav-label {
+        display: block;
+      }
+
+      nav {
+        display: none;
+        flex-direction: column;
+        align-items: stretch;
+        margin-top: 10px;
+      }
+
+      .nav-toggle:checked+.nav-label+nav {
+        display: flex;
+      }
+
+      nav a,
+      .bmc-button-nav {
+        width: 100%;
+        text-align: center;
+        margin: 5px 0;
+      }
+
+      .navbar {
+        border-bottom: none;
+      }
+
+      .honeypot {
+  display: none;
+  position: absolute;
+  left: -9999px;
+  top: -9999px;
+  height: 0;
+  width: 0;
+}
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header class="navbar">
+      <input type="checkbox" id="nav-toggle" class="nav-toggle" />
+      <label for="nav-toggle" class="nav-label">&#9776; Menu</label>
+      <nav>
+        <a href="index.html">Home</a>
+        <a href="tutorial.html">YouTube Disable Guide</a>
+        <a href="about.html">About</a>
+        <a href="https://www.buymeacoffee.com/sergepov" target="_blank" class="bmc-button-nav">☕ Buy me a coffee</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>EduFilter</h1>
+      <h2>Search and Watch Educational YouTube Videos Only – Powered by AI</h2>
+
+      <form id="searchForm" role="search" aria-label="Search educational videos">
+        <input type="text" name="website" id="honeypot" style="display:none">
+        <input type="text" id="searchInput" placeholder="Enter search term" required autocomplete="off" />
+        <button type="submit">Search</button>
+      </form>
+
+
+      <div id="clickInstruction" class="message" style="display: none; margin-bottom: 15px; padding-bottom: 0px; font-size: 1.5rem;">Click a video to watch</div>
+      
+      <section id="results" aria-live="polite"></section>
+
+        <div id="searchInstruction" class="message" style="display: none; margin-top: 20px; padding-top: 0px;">💡 You can enter additional terms like <em>course</em> or <em>tutorial</em> to get more results.</div>
+
+    </main>
+  </div>
+
+  <script>
+    const form = document.getElementById('searchForm');
+    const resultsDiv = document.getElementById('results');
+    const instructionDiv = document.getElementById('clickInstruction');
+    const instructionSearchDiv = document.getElementById('searchInstruction');
+
+    const searchInput = document.getElementById('searchInput');
+
+    const saveToStorage = (query, videos) => {
+      sessionStorage.setItem('lastQuery', query);
+      sessionStorage.setItem('lastResults', JSON.stringify(videos));
+    };
+
+    const loadFromStorage = () => {
+      const query = sessionStorage.getItem('lastQuery');
+      const videos = JSON.parse(sessionStorage.getItem('lastResults') || '[]');
+      if (query && videos.length) {
+        searchInput.value = query;
+        renderVideos(videos);
+      }
+    };
+
+    const renderVideos = (videos) => {
+      instructionDiv.style.display = 'block';
+      instructionSearchDiv.style.display = 'block';
+
+      resultsDiv.innerHTML = videos.map(v => `
+        <div>
+          <a href="player.html?videoID=${v.videoID}">${v.title}</a> 
+          <small>Published: ${v.publishDate}</small>
+          <small>Duration: ${v.duration}</small>
+          <small>Views: ${v.viewCount}</small>
+          <a href="player.html?videoID=${v.videoID}">
+            <img src="${v.image}" alt="Thumbnail of ${v.title}" style="width: 100%; height: auto; max-width: 100%; object-fit: cover; aspect-ratio: 16 / 9;">
+          </a>
+        </div>`).join('');
+    };
+
+
+
+
+
+   form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const honeypotValue = document.getElementById('honeypot').value;
+
+  if (honeypotValue) {
+    // Bot detected — send to Azure Function and stop here
+    await fetch('https://edufilter.azurewebsites.net/api/logBot', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        timestamp: new Date().toISOString(),
+        honeypotValue,
+        userAgent: navigator.userAgent
+      })
+    });
+    console.warn("Bot detected and reported.");
+    return; // prevent further processing
+  }
+
+  // If no honeypot value, continue with legitimate search
+  resultsDiv.innerHTML = '<div class="loader"></div>';
+  instructionDiv.style.display = 'none';
+  instructionSearchDiv.style.display = 'none';
+
+
+  const query = searchInput.value.trim();
+  if (!query) {
+    resultsDiv.innerHTML = '<div class="message error">Please enter a search term.</div>';
+    return;
+  }
+
+  try {
+    const res = await fetch(`https://edufilter.azurewebsites.net/api/filterit?q=${encodeURIComponent(query)}`);
+    if (!res.ok) throw new Error('Network error');
+    const videos = await res.json();
+
+    if (!videos.length) {
+      resultsDiv.innerHTML = '<div class="message info">None of the top YouTube search results for your query appeared to be educational.</div>';
+      return;
+    }
+
+    saveToStorage(query, videos);
+    renderVideos(videos);
+  } catch (err) {
+    console.error(err);
+    resultsDiv.innerHTML = '<div class="message error">⚠️ Failed to load videos. Please try again later.</div>';
+  }
+});
+</script>
+
+
+</body>
+
+</html>
